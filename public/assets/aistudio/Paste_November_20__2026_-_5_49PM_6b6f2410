@@ -1,0 +1,1080 @@
+# MASTER DEVELOPMENT PROMPT — RAILRAKSHA CONTROL CENTRE
+
+## YOUR ROLE
+
+You are an elite frontend engineer, creative WebGL developer, senior UX architect, full-stack engineer, and AI/ML systems engineer.
+
+Build a production-quality, visually exceptional, highly interactive **RailRaksha — AI-Powered Railway Traffic Control and Optimization Centre**.
+
+This project belongs to Smart India Hackathon Problem Statement **SIH-25022 — AI-Powered Train Traffic Control and Optimization System, Ministry of Railways**.
+
+The website must look like a premium railway operations platform used by a professional section controller, not like a college project with random cards, cluttered panels, and dozens of buttons.
+
+My existing work includes a Babylon.js railway simulation, train conflict detection logic, timetable operations, ML risk models, explainable AI, optimization scenarios, external train-status API integration, and a research paper.
+
+**Your task is to connect all these existing capabilities into a beautiful, understandable, controller-centric website.**
+
+This is a functional academic prototype and decision-support application, not a certified operational signalling or automatic train-protection system.
+
+---
+
+# PHASE 1 — ANALYSE EVERY PROVIDED FILE FIRST
+
+I will upload:
+
+1. RailRaksha research paper.
+2. RailRaksha final project report in Word/PDF format.
+3. Complete existing project ZIP.
+4. Main Babylon.js HTML file.
+5. Existing timetable operations dashboard.
+6. UI design reference images and/or website links.
+
+Before writing code:
+
+- Extract and document every implemented feature from the existing project.
+- Identify existing HTML components, JavaScript functions, event handlers, data structures and API endpoints.
+- Identify the real ML pipeline and stored trained models.
+- Identify the distinction between the research-paper benchmark and currently executable models.
+- Identify the existing RailRadar integration and request-quota safeguards.
+- Identify the Babylon.js scene, trains, rail tracks, camera system, conflict detection, signals and weather modes.
+- Identify how timetable operations communicate with the simulator.
+- Identify which functionality is actually implemented, research-only, simulated or proposed.
+- Create a clear feature inventory and architecture mapping.
+
+**Do not hallucinate project capabilities, performance metrics, real-time sensor feeds or API endpoints.**
+
+Prioritize evidence from executable source code for implementation details. Use the paper and report to understand research objectives and explain concepts.
+
+If the uploaded files differ from the project description below, identify the differences before implementing.
+
+Do not remove or rewrite functioning simulation logic unnecessarily.
+
+---
+
+# PHASE 2 — PROJECT CONTEXT
+
+## Core problem
+
+Indian Railways operates mixed traffic involving Vande Bharat, Rajdhani, other passenger services, and freight trains.
+
+Section controllers must manage:
+
+- Dense train traffic
+- Conflicting train movements
+- Variable running speeds
+- Signal and block restrictions
+- Train precedence
+- Delays
+- Track availability
+- Station throat bottlenecks
+- Weather-related operational constraints
+- Cascading disruptions
+- Timetable reorganization
+
+Traditional information views may not present these relationships in a sufficiently predictive or explainable manner.
+
+RailRaksha proposes an AI-assisted, human-in-the-loop decision-support system to help a controller understand developing conflicts, compare feasible movement alternatives and assess their effects.
+
+## Existing academic project
+
+RailRaksha currently includes or has explored:
+
+- Babylon.js 3D digital twin
+- Railway track geometry and train movement
+- Indian railway rolling-stock GLB models
+- Train identity and priority
+- Multiple tracks and block sections
+- Signal state changes
+- Time-to-collision (TTC)
+- Train separation monitoring
+- Closing speed
+- Physics-inspired braking logic
+- CLEAR / CAUTION / DANGER classifications
+- Weather scenarios
+- Artificial conflict injection
+- Traffic and congestion scenarios
+- AI-inspired optimization controls
+- Controller acceptance and modification of simulated plans
+- Timetable operations
+- Scenario replay
+- Synthetic telemetry generation
+- Random Forest
+- CatBoost
+- XGBoost
+- Research benchmarking of eleven supervised ML models
+- SHAP and LIME explanations
+- FastAPI backend
+- Third-party RailRadar train information
+- Local data caching and quota protection
+- Historical train-status snapshots
+- Multilingual announcements
+
+The research describes six train instances and a 10 Hz, 12 km simulation, while later browser implementations may use eight services. Preserve the distinction instead of silently reconciling these into fictional operational figures.
+
+The existing ML experiments use synthetic training data. Their predictions must not be represented as certified real-world collision forecasts.
+
+---
+
+# PHASE 3 — WEBSITE VISION
+
+## Design philosophy
+
+**"Indian Railways operational intelligence meets premium enterprise software."**
+
+Design a beautiful, highly functional control room with excellent typography, purposeful motion, spacious layouts, and clear information hierarchy.
+
+Visual style:
+
+- Dark midnight navy as the main theme
+- Deep graphite surfaces
+- Restrained cyan and electric blue accents
+- Emerald green for normal status
+- Amber for caution
+- Red for critical events
+- Refined typography such as Inter, Geist or Satoshi
+- Extremely subtle glass or frosted effects
+- Fine borders and restrained shadows
+- Smooth transitions
+- Minimal clutter
+- High-quality train and track visualizations
+- Consistent spacing and alignment
+- Professional iconography
+- Excellent visual contrast
+
+Avoid excessive neon, gradients everywhere, glass cards everywhere, oversized glowing headings, flashy charts with no operational purpose, floating overlapping toolbars, or redundant metrics.
+
+Use a proper responsive design system.
+
+The website should feel like a complete software product, not a collection of disconnected widgets.
+
+---
+
+# PHASE 4 — SIGNATURE CINEMATIC INTRO
+
+This is one of the most important parts of the project.
+
+The website must begin with an extraordinary scroll-controlled railway experience.
+
+## Scene 1 — The railway corridor
+
+On page load, show a full-screen cinematic 3D railway track environment.
+
+Use the existing Babylon.js railway track geometry or existing project assets wherever technically possible.
+
+The tracks should extend toward a distant vanishing point.
+
+Include:
+
+- Beautiful realistic rail tracks
+- Sleepers and ballast
+- Atmospheric lighting
+- Subtle fog
+- A distant railway junction
+- Subtle signal lights
+- Minimal ambient animation
+- Fine grid details inspired by railway infrastructure
+
+Display elegant minimal text:
+
+**RAILRAKSHA**
+
+*Intelligence Behind Every Movement.*
+
+Subtitle:
+
+*AI-Powered Railway Traffic Control & Optimization*
+
+And a small animated instruction:
+
+**Scroll to enter Control Centre**
+
+The scene should feel cinematic but not be heavy or slow.
+
+## Scene 2 — Scroll-driven railway zoom
+
+As the user scrolls:
+
+- The virtual camera travels forward along the railway corridor.
+- The track becomes larger and more detailed.
+- Sleeper movement creates a realistic perspective effect.
+- Subtle route lines appear.
+- Station indicators and signals pass naturally.
+- The camera movement follows the scroll precisely.
+- The visual transition is continuous and smooth.
+
+No abrupt page jumps.
+
+Use a pinned scroll timeline with approximately 2–3 viewport heights of controlled animation.
+
+Support trackpad, mouse wheel and touch input.
+
+## Scene 3 — Grid transformation
+
+As scrolling continues:
+
+- Railway sleepers subtly align into a geometric grid.
+- The rails become clean perspective guide lines.
+- The landscape recedes or dissolves.
+- Operational data indicators appear.
+- The railway grid transforms into the dashboard layout.
+- KPI surfaces, navigation and the Control Centre emerge naturally.
+
+This must feel like **the railway network turning into a digital command centre**.
+
+Use a technically sound combination of WebGL, CSS transforms, GSAP ScrollTrigger and/or other scroll animation tools.
+
+Avoid a visually jarring switch between a 3D video and a normal webpage.
+
+## Scene 4 — Control Centre reveal
+
+The final intro position reveals the functional RailRaksha controller dashboard.
+
+Animate in this sequence:
+
+1. Navigation
+2. Network overview
+3. Operational status
+4. Train movement data
+5. Priority alerts
+6. Controller recommendations
+
+Use staggered reveals, elegant easing and clean transitions.
+
+The cinematic intro should not replay whenever the user changes dashboard tabs.
+
+Include:
+
+- Skip Intro
+- Enter Control Centre
+- Reduced-motion accessibility option
+- Lazy loading
+- GPU-efficient rendering
+- WebGL fallback
+- Mobile fallback
+- Automatic canvas disposal on route change
+
+Do not load the full 3D simulation engine twice unnecessarily.
+
+---
+
+# PHASE 5 — INFORMATION ARCHITECTURE
+
+The controller workspace should have only five primary navigation destinations:
+
+1. **Overview**
+2. **Train Monitor**
+3. **Conflict Centre**
+4. **AI Dispatch**
+5. **Digital Twin**
+
+Put settings, logs, model diagnostics, provider quotas, developer tools and documentation into secondary navigation.
+
+No more than five primary navigation items.
+
+The home screen must immediately answer:
+
+**What is happening? What needs my attention? Why? What can I do?**
+
+---
+
+# PHASE 6 — OVERVIEW DASHBOARD
+
+Create a clear operational home screen for the section controller.
+
+## Compact header
+
+Include:
+
+- RailRaksha logo
+- Control Centre title
+- Selected corridor or station
+- Source mode: Third-party / Simulation / Cached
+- Last update timestamp
+- Connection health
+- Notification icon
+- Controller/demo identity
+
+Do not falsely show a production railway authority login or claim live dispatch access.
+
+## Operational summary
+
+Show four main metrics:
+
+- Monitored trains
+- Trains reporting delays
+- Active simulated conflicts
+- Pending controller decisions
+
+The first two can use valid third-party train information where available.
+
+Conflict and decision data must clearly identify their simulation origin.
+
+Every metric must expose its source and freshness.
+
+Do not invent throughput, delay, conflict or optimization values when the backend has not calculated them.
+
+## Priority alert panel
+
+Present the highest-priority actionable issue.
+
+Example format:
+
+**Potential headway conflict**
+
+Train: T02
+
+Following: T01
+
+Location: Simulated block B04
+
+Reason: Closing separation with slower leading traffic.
+
+Suggested action: Review a simulated hold or reduced-speed alternative.
+
+Buttons:
+
+- Investigate
+- Compare Plans
+- Open Digital Twin
+
+Actual values must come from the connected simulation or backend.
+
+## Corridor situation strip
+
+Show a compact, readable horizontal railway network view.
+
+Display:
+
+- Stations
+- Track sections
+- Trains
+- Direction of movement
+- Occupied/available simulated blocks
+- Highlighted constraints
+
+Use source-specific labels.
+
+Do not infer real track occupancy merely from third-party station arrival times.
+
+---
+
+# PHASE 7 — TRAIN MONITOR
+
+This is the everyday working area for the section controller.
+
+## Train movement table
+
+Include useful columns:
+
+- Train number
+- Train name
+- Origin / destination
+- Last reported station
+- Next scheduled station
+- Scheduled arrival
+- Reported arrival or estimated arrival, when supplied
+- Delay
+- Status
+- Last updated
+- Data source
+
+Provide:
+
+- Train-number search
+- Search by station
+- Filters for delayed/on-time/unknown
+- Sorting
+- Train-type identification
+- Clean detail drawer on row click
+- Manual refresh button
+- Cached snapshot indicator
+
+Only show supported live fields from the RailRadar API.
+
+Never fabricate live coordinates, live velocities, track numbers or signal aspects.
+
+## Train detail drawer
+
+Clicking a train opens an elegant side panel.
+
+Include:
+
+- Identity and route
+- Running status
+- Timeline of stations
+- Reported delay
+- Route progress when derivable
+- Last successful update
+- Historical observations
+- Data freshness
+- Any available provider confidence metadata
+
+If data is missing, display **Not available**.
+
+## Fleet monitoring
+
+Permit multiple trains in a watchlist without hardcoding the original demo's eight services as the only possible trains.
+
+Keep the interface fast, searchable and easy to understand.
+
+---
+
+# PHASE 8 — CONFLICT CENTRE
+
+This screen translates simulated telemetry and ML output into an actionable explanation.
+
+## Conflict queue
+
+For each conflict, display:
+
+- Incident ID
+- Affected train pair
+- Track/block identifier
+- CLEAR / CAUTION / DANGER status
+- Time-to-collision, if computable
+- Net separation
+- Relative closing speed
+- Related weather or restriction
+- Detection time
+- Predicted risk class
+- Explanation availability
+- Controller review status
+
+Sort by urgency.
+
+Do not show arbitrary risk percentages unless returned by a valid model.
+
+## Plain-language explanation
+
+Convert technical data into readable descriptions.
+
+Example:
+
+**Why is this train at risk?**
+
+"The following train is moving faster than the leading train. Their separation is decreasing, and the simulated time-to-collision has crossed the caution threshold."
+
+Below the explanation, show no more than three key contributing factors by default.
+
+## Explainable AI
+
+Integrate existing SHAP and LIME outputs when available.
+
+Expose:
+
+- Feature contribution
+- Effect on the model's prediction
+- Important safety variables
+- Model name
+- Source dataset classification
+- Uncertainty / limitations
+
+Avoid presenting SHAP or LIME values as physical proof of an actual collision.
+
+If explanation endpoints fail, show the deterministic physical explanation separately rather than inventing AI attributions.
+
+---
+
+# PHASE 9 — AI DISPATCH AND OPTIMIZATION
+
+This should be the most impressive and useful operational screen.
+
+The controller needs to compare alternative decisions without relying entirely on the 3D simulation.
+
+## Current plan vs proposed plan
+
+Create a professional comparison layout.
+
+**Current plan**
+
+- Existing simulated precedence
+- Projected delays
+- Waiting trains
+- Conflict status
+- Block occupancy constraints
+- Estimated completion or throughput when available
+
+**Proposed plan**
+
+- Recommended precedence
+- Suggested train hold or release
+- Alternative track/loop-line assignment only when modeled and valid
+- Impact on other trains
+- Resulting simulated delay
+- Remaining conflicts
+- Tradeoffs
+
+Show baseline versus proposed changes using small, understandable charts.
+
+Do not use hardcoded improvement percentages.
+
+## Decision cards
+
+Examples:
+
+- Allow a priority passenger train to proceed first
+- Hold a freight service at an available loop
+- Maintain safe following separation
+- Review a conflicting route
+- Delay a release until the simulated constraint clears
+
+Recommendations must be produced by existing optimization logic or explicitly marked as rule-based proposals.
+
+Do not invent feasible infrastructure paths.
+
+## Human-in-the-loop workflow
+
+Buttons:
+
+**Accept for Simulation**
+
+**Modify Scenario**
+
+**Reject Proposal**
+
+Acceptance must update the scenario state and decision history, but must NEVER issue a real railway movement authority, signal instruction or braking command.
+
+Show a before/after comparison after approval.
+
+Include:
+
+- Controller note
+- Reason for decision
+- Timestamp
+- Plan version
+- Predicted impact
+- Replay identifier
+
+## Timetable impact
+
+Show which services become more delayed or less delayed under each proposed alternative.
+
+Use a compact timeline or stringline chart when data supports it.
+
+A good recommendation should account for the entire affected section, not merely one priority train.
+
+---
+
+# PHASE 10 — DIGITAL TWIN INTEGRATION
+
+My Babylon.js digital twin already exists.
+
+**Do not rebuild it from scratch.**
+
+Create a dedicated Digital Twin view or an Open Simulation button that launches the existing simulator.
+
+Use the original assets and functionality:
+
+- Multiple train types
+- Railway tracks
+- Signal states
+- Station area
+- Weather
+- Cameras
+- Headway monitoring
+- TTC
+- Conflict injection
+- Braking demonstrations
+- Traffic scenarios
+- Optimization scenarios
+- Timetable dashboard
+
+The controller website should exchange actual supported scenario data and decision results with the simulator.
+
+Investigate the existing BroadcastChannel implementation before choosing a communication method.
+
+A suitable integration could use:
+
+- FastAPI for shared backend state
+- Existing browser BroadcastChannel for cross-tab communication
+- Explicit scenario IDs
+- Versioned messages
+- Acknowledgements and failure handling
+- A small local scenario store
+
+Implement only interfaces supported by the existing code, or add and document the missing adapter.
+
+**The website must function even when the simulator tab is closed.**
+
+When the simulator is disconnected:
+
+- Continue showing saved train reports
+- Continue showing cached external data
+- Continue displaying earlier scenario results
+- Label simulation-dependent operations as unavailable
+- Offer to launch or reconnect the digital twin
+
+The website is the controller interface.
+
+The simulation is the verification and visualization tool.
+
+---
+
+# PHASE 11 — REAL-TIME DATA AND API INTEGRATION
+
+## Existing external provider
+
+The project already has an integrated RailRadar train-status API.
+
+Reuse its existing backend integration, environment configuration, caching and request counters if present.
+
+Do not delete it or replace it with an LLM.
+
+Real railway running status and generative AI are different services.
+
+RailRadar handles external train information.
+
+The LLM helps explain existing data.
+
+## API request management
+
+The existing project uses conservative local provider-call limits:
+
+- 12 calls per day
+- 240 calls per month
+- Manual refresh
+- Response caching
+- Up to three train numbers per fleet refresh
+
+Inspect the actual implementation and preserve or strengthen these safeguards.
+
+These are application safeguards, not a guarantee of the provider's real allowance.
+
+Add:
+
+- Visible quota remaining
+- Last successful provider request
+- Cache age
+- Provider unavailable state
+- Source classification
+- Stale-data warnings
+- No unnecessary background polling
+- Train-specific duplicate-request suppression
+- Request counting before outbound calls
+
+Never introduce a dashboard render loop that calls the train provider repeatedly.
+
+## Secure credentials
+
+Keep API keys only in server-side environment variables.
+
+Never include keys in HTML, browser JavaScript, screenshots, Git history or downloadable frontend bundles.
+
+Use a `.env.example` file with placeholder names.
+
+The website should support cached/demo mode when credentials are absent.
+
+## Accurate data provenance
+
+Every displayed metric must belong to one of these categories:
+
+- THIRD_PARTY_REPORTED
+- SIMULATED
+- ML_PREDICTED_SYNTHETIC
+- CONTROLLER_DECISION
+- DERIVED_ESTIMATE
+- CACHED
+
+Show the source, timestamp and validity level wherever it affects interpretation.
+
+Do not label third-party reported data as verified track telemetry or official signalling information.
+
+---
+
+# PHASE 12 — GEMINI OR GROK AI ASSISTANT
+
+Integrate **one** optional LLM provider, preferably Gemini or Grok, using the provider's official current API.
+
+Use one server-side configuration:
+
+`LLM_PROVIDER=gemini`
+
+or
+
+`LLM_PROVIDER=grok`
+
+With the corresponding server-side environment secret.
+
+The LLM must not be needed to run the core railway application.
+
+## AI assistant purpose
+
+Name it:
+
+**RailRaksha Intelligence Assistant**
+
+It should help the controller interpret system data.
+
+Example questions:
+
+- Which monitored trains have reported delays?
+- Which simulated conflict is most urgent?
+- Why was this conflict classified as caution?
+- Which simulated train movement is creating the bottleneck?
+- What is the impact of the proposed dispatch plan?
+- Why did the ML model assign this risk level?
+- Which inputs are real reports and which are simulated?
+- What assumptions underlie the recommendation?
+
+## AI behaviour
+
+The assistant must use actual current application context passed from the backend.
+
+Use structured context containing:
+
+- Selected train
+- Reported delay
+- Event timestamp
+- Relevant simulated track/block
+- Conflict information
+- Model prediction
+- SHAP/LIME output
+- Optimization alternatives
+- Data provenance
+- Missing information
+
+Use a constrained server-side tool-calling or retrieval approach.
+
+The model must never invent live railway data.
+
+It must not silently convert missing fields into assumptions.
+
+It must not execute dispatch decisions or signal changes.
+
+It must not treat its own answer as an authoritative safety recommendation.
+
+AI should explain what the system knows, indicate uncertainty, and direct the controller to review the evidence.
+
+Rate-limit AI requests and prevent duplicate prompt submissions.
+
+If the AI service is unavailable, display existing deterministic explanations.
+
+Never make the app dependent on a continuously running paid LLM service.
+
+---
+
+# PHASE 13 — SECONDARY CONTROLLER TOOLS
+
+These should be accessible but not visually dominate the homepage.
+
+## Timetable and section planning
+
+- Train ordering
+- Station arrival/departure
+- Simulated timetable deviation
+- Priority conflicts
+- Proposed sequence changes
+- Waiting services
+
+## Scenario Lab
+
+Preset scenarios:
+
+- Normal traffic
+- Dense traffic
+- Headway conflict
+- Rain conditions
+- Snow/low-adhesion demonstration
+- Station throat congestion
+- Track restriction
+- Train delay propagation
+
+Only include scenarios supported by the current implementation or add explicitly identified simulated scenarios.
+
+## Decision history
+
+- Incident
+- Recommendation
+- Controller action
+- Time
+- Before/after metrics
+- Simulator result
+
+## Model information
+
+Advanced drawer for:
+
+- Random Forest
+- CatBoost
+- XGBoost
+- Research-only models, where applicable
+- Synthetic dataset description
+- Data size
+- Evaluation methodology
+- Performance metrics
+- SHAP and LIME
+- Limitations
+
+## Data and system health
+
+Show:
+
+- Backend connectivity
+- Model availability
+- API configuration
+- Provider quota
+- Cache status
+- Simulator connectivity
+- Data source
+- Latest successful synchronization
+
+Do not clutter the overview with these engineering details.
+
+---
+
+# PHASE 14 — ANIMATIONS AND INTERACTIONS
+
+Create a beautiful, animated interface with motion that communicates function.
+
+## Required animations
+
+- Scroll-driven cinematic railway intro
+- Railway-to-grid morphing transition
+- Sidebar transitions
+- Train row hover interactions
+- Smooth filter transitions
+- Train detail drawer
+- Status transitions
+- Animated simulated conflict timeline
+- Optimizer comparison reveals
+- SHAP contribution animations
+- Route timeline transitions
+- Elegant modal appearance
+- Loading skeletons
+- Button feedback
+- Page transitions
+- Reduced-motion variants
+
+## Animation rules
+
+Use restrained movement within the dashboard.
+
+Most UI interactions should be short, smooth and professional.
+
+Do not make every card bounce.
+
+Do not use a glowing particle effect behind every panel.
+
+Do not animate critical numerical metrics in ways that hide their exact values.
+
+Maintain readability and keyboard accessibility.
+
+Optimize scroll performance.
+
+Avoid excessive frame processing.
+
+---
+
+# PHASE 15 — TECHNICAL STACK
+
+Preferred architecture:
+
+**Frontend**
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- Lucide icons
+- GSAP ScrollTrigger
+- Framer Motion or Motion for React
+- React Three Fiber / Three.js for the cinematic introduction when appropriate
+- Existing Babylon.js simulator retained separately
+- Recharts or lightweight SVG for operational charts
+- TanStack Query for data fetching and cache state
+
+**Backend**
+
+- Reuse existing Python FastAPI services
+- Pydantic models
+- SQLite for local snapshots and controller decisions, or existing project storage
+- Existing trained ML artifacts
+- Existing RailRadar provider gateway
+- Optional server-side Gemini or Grok adapter
+
+Do not create a second unrelated backend if the current FastAPI backend can be extended.
+
+Do not migrate the existing Babylon.js simulator into Three.js merely for aesthetic reasons.
+
+The intro animation and operational simulator may use different rendering technologies, but they must be managed efficiently.
+
+---
+
+# PHASE 16 — UX REQUIREMENTS
+
+The website should work for a controller who has never seen the project.
+
+Design for clarity.
+
+A user should understand the most urgent issue within five seconds.
+
+Every action needs a clear purpose.
+
+Every alert should communicate:
+
+1. What happened?
+2. Where?
+3. Which trains?
+4. Why is this important?
+5. What actions are available?
+6. What is the expected simulated impact?
+
+## Mandatory usability rules
+
+- Minimal top navigation
+- Maximum four important KPI cards
+- No giant technical log on the homepage
+- No stacked floating panels
+- No overlapping elements
+- No duplicated controls
+- No confusing AI terminology without explanation
+- No fake real-time numbers
+- No invented model results
+- No irrelevant charts
+- No unnecessary settings on the main screen
+- No dependence on 3D rendering for routine monitoring
+
+Use plain language.
+
+Advanced technical details should open only on request.
+
+---
+
+# PHASE 17 — PRESENTATION / VIVA MODE
+
+Create a dedicated **Demo Mode** for our university presentation.
+
+This must use real executable simulator scenarios and clearly labeled sample or cached data.
+
+Demo Mode sequence:
+
+**Step 1 — Operational overview**
+
+Show the train monitoring interface and explain its purpose.
+
+**Step 2 — External train status**
+
+Search a train number such as 22416 and display available third-party information, preferably from cache to conserve quota.
+
+**Step 3 — Conflict detection**
+
+Load a reproducible simulated headway-conflict scenario.
+
+**Step 4 — Explain the problem**
+
+Show train pair, gap, relative speed and TTC.
+
+**Step 5 — AI reasoning**
+
+Present the existing model output and SHAP/LIME explanation when available.
+
+**Step 6 — Controller decision**
+
+Compare baseline and simulated optimized movement plans.
+
+**Step 7 — Demonstrate outcome**
+
+Open the Babylon.js digital twin and replay the selected scenario.
+
+**Step 8 — Impact summary**
+
+Show calculated baseline and alternative metrics, together with the decision log.
+
+Add a clear **Next Demo Step** interaction but keep every screen accessible directly.
+
+Include Demo Reset and Return to Live/Cached Mode.
+
+No external API requests should be necessary for the demo sequence.
+
+This feature is very important because our faculty must be able to understand the complete project within approximately five minutes.
+
+---
+
+# PHASE 18 — PERFORMANCE, SAFETY AND RELIABILITY
+
+The system must:
+
+- Run locally on a standard student laptop
+- Support macOS Chrome and Safari
+- Avoid WebGL memory leaks
+- Load the cinematic intro progressively
+- Offer Skip Intro
+- Respect reduced-motion settings
+- Preserve API quota safeguards
+- Avoid embedding secret credentials
+- Handle backend failures gracefully
+- Recover from missing third-party data
+- Avoid fabricated safety claims
+- Support keyboard interaction
+- Maintain responsive layouts
+- Provide deterministic offline demonstration data
+
+The homepage must render even when the AI API is unavailable.
+
+The controller should never mistake an academic simulation for an authorized Indian Railways dispatch system.
+
+---
+
+# PHASE 19 — REQUIRED DELIVERABLES
+
+Generate actual, complete, runnable application code.
+
+Do not provide only design mockups.
+
+Required deliverables:
+
+1. Complete frontend source
+2. Reusable UI components
+3. Cinematic 3D scroll introduction
+4. Functional operational dashboard
+5. Train Monitor
+6. Conflict Centre
+7. AI Dispatch interface
+8. Existing digital twin integration
+9. FastAPI integration adapter
+10. Secure Gemini or Grok integration
+11. RailRadar quota-safe connection
+12. Demo Mode
+13. Responsive styling
+14. `.env.example`
+15. Setup and installation README
+16. Architecture explanation
+17. API endpoint mapping
+18. Feature verification checklist
+19. Automated tests for critical flows
+20. ZIP containing the runnable finished project
+
+Preserve the original Babylon.js simulator, existing datasets, model artifacts and asset folders.
+
+Do not overwrite `.env` or delete historical data.
+
+Any unsupported or newly proposed feature must be identified as such.
+
+Test navigation, data fetching, caching, view transitions, ML inference integration, simulation connection and API failure behaviour.
+
+Provide exact macOS Terminal commands to start the application.
+
+---
+
+# FINAL QUALITY STANDARD
+
+Build a memorable, premium, exceptionally polished railway operations website.
+
+The experience should start with a cinematic railway corridor, zoom into the tracks as the user scrolls, transform into an elegant rail network grid, and reveal the RailRaksha Control Centre.
+
+After the animation, the user should enter a clear, focused, powerful operational workspace.
+
+The controller must be able to:
+
+**Monitor → Detect → Understand → Compare → Decide → Review**
+
+The simulator should remain an optional companion for visualizing and verifying simulated outcomes.
+
+The controller dashboard must be capable of performing its normal information and decision-review workflow independently.
+
+Every major feature must connect to a real existing backend capability or be transparently identified as a simulated or newly implemented extension.
+
+**Design beauty is essential. Functional correctness, explainability, source transparency, quota safety and usability are equally essential.**
+
+Do not build another cluttered college-project dashboard. Build a coherent product where every element exists for a reason.

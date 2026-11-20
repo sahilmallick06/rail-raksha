@@ -1,0 +1,786 @@
+{
+  "dayKey": "2026-11-20",
+  "monthKey": "2026-11",
+  "dailyUsed": 0,
+  "monthlyUsed": 0,
+  "cooldownUntil": null,
+  "lastExternalCallAt": null,
+  "totalCacheHits": 0,
+  "totalSuppressedDuplicates": 0,
+  "watchlist": [
+    "12002",
+    "12302",
+    "12306",
+    "12951",
+    "20818",
+    "22416",
+    "22439",
+    "22824"
+  ],
+  "snapshots": {
+    "12002": {
+      "trainNo": "12002",
+      "trainName": "Rani Kamalapati Shatabdi Express",
+      "originCode": "NDLS",
+      "originName": "New Delhi",
+      "destinationCode": "RKMP",
+      "destinationName": "Rani Kamalapati",
+      "lastReportedStationCode": "AGC",
+      "lastReportedStationName": "Agra Cantt",
+      "nextScheduledStationCode": "GWL",
+      "nextScheduledStationName": "Gwalior Jn",
+      "scheduledEta": "09:23",
+      "reportedEta": "09:26",
+      "delayMinutes": 3,
+      "runningStatus": "ON_TIME",
+      "lastUpdatedAt": "2026-11-20T12:54:34.612Z",
+      "fetchedFromExternalAt": null,
+      "cacheAgeMinutes": 0,
+      "isStale": false,
+      "provenance": "CACHED",
+      "sourceLabel": "Cached Reference Snapshot (No Live Call Used)",
+      "inWatchlist": true,
+      "corridorTrainId": "T04",
+      "stationTimeline": [
+        {
+          "stationCode": "NDLS",
+          "stationName": "New Delhi",
+          "scheduledArrival": null,
+          "scheduledDeparture": "Origin Dep",
+          "reportedArrival": null,
+          "reportedDeparture": "Departed",
+          "delayMin": 1,
+          "distanceKm": 0,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "MTJ",
+          "stationName": "Mathura Jn",
+          "scheduledArrival": "07:22",
+          "scheduledDeparture": "07:22",
+          "reportedArrival": "07:22",
+          "reportedDeparture": "07:22",
+          "delayMin": 3,
+          "distanceKm": 141,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "AGC",
+          "stationName": "Agra Cantt",
+          "scheduledArrival": "07:57",
+          "scheduledDeparture": "07:57",
+          "reportedArrival": "07:57",
+          "reportedDeparture": null,
+          "delayMin": 3,
+          "distanceKm": 195,
+          "status": "CURRENT"
+        },
+        {
+          "stationCode": "GWL",
+          "stationName": "Gwalior Jn",
+          "scheduledArrival": "09:23",
+          "scheduledDeparture": "09:23",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 3,
+          "distanceKm": 313,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "RKMP",
+          "stationName": "Rani Kamalapati",
+          "scheduledArrival": "09:23",
+          "scheduledDeparture": null,
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 3,
+          "distanceKm": 493,
+          "status": "UPCOMING"
+        }
+      ],
+      "historicalObservations": [
+        {
+          "observedAt": "2026-11-20T12:54:34.612Z",
+          "stationCode": "AGC",
+          "stationName": "Agra Cantt",
+          "delayMin": 3,
+          "source": "CACHED",
+          "note": "Baseline cached observation loaded for zero-quota startup & viva reliability."
+        }
+      ],
+      "unavailableFieldsNote": "Live track-circuit coordinates, signal aspect, and physical inter-train meter gap are NOT supplied by RailRadar/external running-status APIs."
+    },
+    "12302": {
+      "trainNo": "12302",
+      "trainName": "Howrah Rajdhani Express (Via Gaya)",
+      "originCode": "NDLS",
+      "originName": "New Delhi",
+      "destinationCode": "HWH",
+      "destinationName": "Howrah Jn",
+      "lastReportedStationCode": "ALJN",
+      "lastReportedStationName": "Aligarh Jn",
+      "nextScheduledStationCode": "CNB",
+      "nextScheduledStationName": "Kanpur Central",
+      "scheduledEta": "21:37",
+      "reportedEta": "21:46",
+      "delayMinutes": 9,
+      "runningStatus": "DELAYED",
+      "lastUpdatedAt": "2026-11-20T12:54:34.612Z",
+      "fetchedFromExternalAt": null,
+      "cacheAgeMinutes": 0,
+      "isStale": false,
+      "provenance": "CACHED",
+      "sourceLabel": "Cached Reference Snapshot (No Live Call Used)",
+      "inWatchlist": true,
+      "corridorTrainId": "T06",
+      "stationTimeline": [
+        {
+          "stationCode": "NDLS",
+          "stationName": "New Delhi",
+          "scheduledArrival": null,
+          "scheduledDeparture": "Origin Dep",
+          "reportedArrival": null,
+          "reportedDeparture": "Departed",
+          "delayMin": 4,
+          "distanceKm": 0,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "ALJN",
+          "stationName": "Aligarh Jn",
+          "scheduledArrival": "18:24",
+          "scheduledDeparture": "18:24",
+          "reportedArrival": "18:24",
+          "reportedDeparture": null,
+          "delayMin": 9,
+          "distanceKm": 126,
+          "status": "CURRENT"
+        },
+        {
+          "stationCode": "CNB",
+          "stationName": "Kanpur Central",
+          "scheduledArrival": "21:37",
+          "scheduledDeparture": "21:37",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 9,
+          "distanceKm": 440,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "GAYA",
+          "stationName": "Gaya Jn",
+          "scheduledArrival": "03:55",
+          "scheduledDeparture": "03:55",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 9,
+          "distanceKm": 997,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "HWH",
+          "stationName": "Howrah Jn",
+          "scheduledArrival": "21:37",
+          "scheduledDeparture": null,
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 9,
+          "distanceKm": 1177,
+          "status": "UPCOMING"
+        }
+      ],
+      "historicalObservations": [
+        {
+          "observedAt": "2026-11-20T12:54:34.612Z",
+          "stationCode": "ALJN",
+          "stationName": "Aligarh Jn",
+          "delayMin": 9,
+          "source": "CACHED",
+          "note": "Baseline cached observation loaded for zero-quota startup & viva reliability."
+        }
+      ],
+      "unavailableFieldsNote": "Live track-circuit coordinates, signal aspect, and physical inter-train meter gap are NOT supplied by RailRadar/external running-status APIs."
+    },
+    "12306": {
+      "trainNo": "12306",
+      "trainName": "Kolkata Rajdhani Express",
+      "originCode": "NDLS",
+      "originName": "New Delhi",
+      "destinationCode": "HWH",
+      "destinationName": "Howrah Jn",
+      "lastReportedStationCode": "CNB",
+      "lastReportedStationName": "Kanpur Central",
+      "nextScheduledStationCode": "PRYJ",
+      "nextScheduledStationName": "Prayagraj Jn",
+      "scheduledEta": "23:43",
+      "reportedEta": "00:01",
+      "delayMinutes": 18,
+      "runningStatus": "DELAYED",
+      "lastUpdatedAt": "2026-11-20T12:54:34.612Z",
+      "fetchedFromExternalAt": null,
+      "cacheAgeMinutes": 0,
+      "isStale": false,
+      "provenance": "CACHED",
+      "sourceLabel": "Cached Reference Snapshot (No Live Call Used)",
+      "inWatchlist": true,
+      "corridorTrainId": "T05",
+      "stationTimeline": [
+        {
+          "stationCode": "NDLS",
+          "stationName": "New Delhi",
+          "scheduledArrival": null,
+          "scheduledDeparture": "Origin Dep",
+          "reportedArrival": null,
+          "reportedDeparture": "Departed",
+          "delayMin": 7,
+          "distanceKm": 0,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "CNB",
+          "stationName": "Kanpur Central",
+          "scheduledArrival": "21:37",
+          "scheduledDeparture": "21:37",
+          "reportedArrival": "21:37",
+          "reportedDeparture": null,
+          "delayMin": 18,
+          "distanceKm": 440,
+          "status": "CURRENT"
+        },
+        {
+          "stationCode": "PRYJ",
+          "stationName": "Prayagraj Jn",
+          "scheduledArrival": "23:43",
+          "scheduledDeparture": "23:43",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 18,
+          "distanceKm": 635,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "PNBE",
+          "stationName": "Patna Jn",
+          "scheduledArrival": "04:50",
+          "scheduledDeparture": "04:50",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 18,
+          "distanceKm": 1000,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "HWH",
+          "stationName": "Howrah Jn",
+          "scheduledArrival": "23:43",
+          "scheduledDeparture": null,
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 18,
+          "distanceKm": 1180,
+          "status": "UPCOMING"
+        }
+      ],
+      "historicalObservations": [
+        {
+          "observedAt": "2026-11-20T12:54:34.612Z",
+          "stationCode": "CNB",
+          "stationName": "Kanpur Central",
+          "delayMin": 18,
+          "source": "CACHED",
+          "note": "Baseline cached observation loaded for zero-quota startup & viva reliability."
+        }
+      ],
+      "unavailableFieldsNote": "Live track-circuit coordinates, signal aspect, and physical inter-train meter gap are NOT supplied by RailRadar/external running-status APIs."
+    },
+    "12951": {
+      "trainNo": "12951",
+      "trainName": "Mumbai Central–New Delhi Tejas Rajdhani",
+      "originCode": "MMCT",
+      "originName": "Mumbai Central",
+      "destinationCode": "NDLS",
+      "destinationName": "New Delhi",
+      "lastReportedStationCode": "KOTA",
+      "lastReportedStationName": "Kota Jn",
+      "nextScheduledStationCode": "NDLS",
+      "nextScheduledStationName": "New Delhi",
+      "scheduledEta": "08:32",
+      "reportedEta": "08:38",
+      "delayMinutes": 6,
+      "runningStatus": "DELAYED",
+      "lastUpdatedAt": "2026-11-20T12:54:34.612Z",
+      "fetchedFromExternalAt": null,
+      "cacheAgeMinutes": 0,
+      "isStale": false,
+      "provenance": "CACHED",
+      "sourceLabel": "Cached Reference Snapshot (No Live Call Used)",
+      "inWatchlist": true,
+      "corridorTrainId": null,
+      "stationTimeline": [
+        {
+          "stationCode": "MMCT",
+          "stationName": "Mumbai Central",
+          "scheduledArrival": null,
+          "scheduledDeparture": "Origin Dep",
+          "reportedArrival": null,
+          "reportedDeparture": "Departed",
+          "delayMin": 2,
+          "distanceKm": 0,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "ST",
+          "stationName": "Surat",
+          "scheduledArrival": "19:43",
+          "scheduledDeparture": "19:43",
+          "reportedArrival": "19:43",
+          "reportedDeparture": "19:43",
+          "delayMin": 6,
+          "distanceKm": 263,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "BRC",
+          "stationName": "Vadodara Jn",
+          "scheduledArrival": "21:06",
+          "scheduledDeparture": "21:06",
+          "reportedArrival": "21:06",
+          "reportedDeparture": "21:06",
+          "delayMin": 6,
+          "distanceKm": 392,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "KOTA",
+          "stationName": "Kota Jn",
+          "scheduledArrival": "03:15",
+          "scheduledDeparture": "03:15",
+          "reportedArrival": "03:15",
+          "reportedDeparture": null,
+          "delayMin": 6,
+          "distanceKm": 920,
+          "status": "CURRENT"
+        },
+        {
+          "stationCode": "NDLS",
+          "stationName": "New Delhi",
+          "scheduledArrival": "08:32",
+          "scheduledDeparture": null,
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 6,
+          "distanceKm": 1100,
+          "status": "UPCOMING"
+        }
+      ],
+      "historicalObservations": [
+        {
+          "observedAt": "2026-11-20T12:54:34.612Z",
+          "stationCode": "KOTA",
+          "stationName": "Kota Jn",
+          "delayMin": 6,
+          "source": "CACHED",
+          "note": "Baseline cached observation loaded for zero-quota startup & viva reliability."
+        }
+      ],
+      "unavailableFieldsNote": "Live track-circuit coordinates, signal aspect, and physical inter-train meter gap are NOT supplied by RailRadar/external running-status APIs."
+    },
+    "20818": {
+      "trainNo": "20818",
+      "trainName": "Bhubaneswar Tejas Rajdhani",
+      "originCode": "NDLS",
+      "originName": "New Delhi",
+      "destinationCode": "BBS",
+      "destinationName": "Bhubaneswar",
+      "lastReportedStationCode": "GZB",
+      "lastReportedStationName": "Ghaziabad Jn",
+      "nextScheduledStationCode": "CNB",
+      "nextScheduledStationName": "Kanpur Central",
+      "scheduledEta": "21:55",
+      "reportedEta": "21:59",
+      "delayMinutes": 4,
+      "runningStatus": "ON_TIME",
+      "lastUpdatedAt": "2026-11-20T12:54:34.612Z",
+      "fetchedFromExternalAt": null,
+      "cacheAgeMinutes": 0,
+      "isStale": false,
+      "provenance": "CACHED",
+      "sourceLabel": "Cached Reference Snapshot (No Live Call Used)",
+      "inWatchlist": true,
+      "corridorTrainId": "T01",
+      "stationTimeline": [
+        {
+          "stationCode": "NDLS",
+          "stationName": "New Delhi",
+          "scheduledArrival": null,
+          "scheduledDeparture": "Origin Dep",
+          "reportedArrival": null,
+          "reportedDeparture": "Departed",
+          "delayMin": 2,
+          "distanceKm": 0,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "GZB",
+          "stationName": "Ghaziabad Jn",
+          "scheduledArrival": "17:34",
+          "scheduledDeparture": "17:34",
+          "reportedArrival": "17:34",
+          "reportedDeparture": null,
+          "delayMin": 4,
+          "distanceKm": 26,
+          "status": "CURRENT"
+        },
+        {
+          "stationCode": "CNB",
+          "stationName": "Kanpur Central",
+          "scheduledArrival": "21:55",
+          "scheduledDeparture": "21:55",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 4,
+          "distanceKm": 440,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "DDU",
+          "stationName": "Pt DD Upadhyaya Jn",
+          "scheduledArrival": "01:52",
+          "scheduledDeparture": "01:52",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 4,
+          "distanceKm": 787,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "BBS",
+          "stationName": "Bhubaneswar",
+          "scheduledArrival": "21:55",
+          "scheduledDeparture": null,
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 4,
+          "distanceKm": 967,
+          "status": "UPCOMING"
+        }
+      ],
+      "historicalObservations": [
+        {
+          "observedAt": "2026-11-20T12:54:34.612Z",
+          "stationCode": "GZB",
+          "stationName": "Ghaziabad Jn",
+          "delayMin": 4,
+          "source": "CACHED",
+          "note": "Baseline cached observation loaded for zero-quota startup & viva reliability."
+        }
+      ],
+      "unavailableFieldsNote": "Live track-circuit coordinates, signal aspect, and physical inter-train meter gap are NOT supplied by RailRadar/external running-status APIs."
+    },
+    "22416": {
+      "trainNo": "22416",
+      "trainName": "Varanasi Vande Bharat Express",
+      "originCode": "NDLS",
+      "originName": "New Delhi",
+      "destinationCode": "BSB",
+      "destinationName": "Varanasi Jn",
+      "lastReportedStationCode": "GZB",
+      "lastReportedStationName": "Ghaziabad Jn",
+      "nextScheduledStationCode": "CNB",
+      "nextScheduledStationName": "Kanpur Central",
+      "scheduledEta": "19:08",
+      "reportedEta": "19:19",
+      "delayMinutes": 11,
+      "runningStatus": "DELAYED",
+      "lastUpdatedAt": "2026-11-20T12:54:34.612Z",
+      "fetchedFromExternalAt": null,
+      "cacheAgeMinutes": 0,
+      "isStale": false,
+      "provenance": "CACHED",
+      "sourceLabel": "Cached Reference Snapshot (No Live Call Used)",
+      "inWatchlist": true,
+      "corridorTrainId": "T02",
+      "stationTimeline": [
+        {
+          "stationCode": "NDLS",
+          "stationName": "New Delhi",
+          "scheduledArrival": null,
+          "scheduledDeparture": "Origin Dep",
+          "reportedArrival": null,
+          "reportedDeparture": "Departed",
+          "delayMin": 4,
+          "distanceKm": 0,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "GZB",
+          "stationName": "Ghaziabad Jn",
+          "scheduledArrival": "15:32",
+          "scheduledDeparture": "15:32",
+          "reportedArrival": "15:32",
+          "reportedDeparture": null,
+          "delayMin": 11,
+          "distanceKm": 26,
+          "status": "CURRENT"
+        },
+        {
+          "stationCode": "CNB",
+          "stationName": "Kanpur Central",
+          "scheduledArrival": "19:08",
+          "scheduledDeparture": "19:08",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 11,
+          "distanceKm": 440,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "PRYJ",
+          "stationName": "Prayagraj Jn",
+          "scheduledArrival": "21:11",
+          "scheduledDeparture": "21:11",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 11,
+          "distanceKm": 635,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "BSB",
+          "stationName": "Varanasi Jn",
+          "scheduledArrival": "19:08",
+          "scheduledDeparture": null,
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 11,
+          "distanceKm": 815,
+          "status": "UPCOMING"
+        }
+      ],
+      "historicalObservations": [
+        {
+          "observedAt": "2026-11-20T12:54:34.612Z",
+          "stationCode": "GZB",
+          "stationName": "Ghaziabad Jn",
+          "delayMin": 11,
+          "source": "CACHED",
+          "note": "Baseline cached observation loaded for zero-quota startup & viva reliability."
+        }
+      ],
+      "unavailableFieldsNote": "Live track-circuit coordinates, signal aspect, and physical inter-train meter gap are NOT supplied by RailRadar/external running-status APIs."
+    },
+    "22439": {
+      "trainNo": "22439",
+      "trainName": "SMVD Katra Vande Bharat Express",
+      "originCode": "NDLS",
+      "originName": "New Delhi",
+      "destinationCode": "SVDK",
+      "destinationName": "SMVD Katra",
+      "lastReportedStationCode": "UMB",
+      "lastReportedStationName": "Ambala Cantt Jn",
+      "nextScheduledStationCode": "LDH",
+      "nextScheduledStationName": "Ludhiana Jn",
+      "scheduledEta": "09:19",
+      "reportedEta": "09:19",
+      "delayMinutes": 0,
+      "runningStatus": "ON_TIME",
+      "lastUpdatedAt": "2026-11-20T12:54:34.612Z",
+      "fetchedFromExternalAt": null,
+      "cacheAgeMinutes": 0,
+      "isStale": false,
+      "provenance": "CACHED",
+      "sourceLabel": "Cached Reference Snapshot (No Live Call Used)",
+      "inWatchlist": true,
+      "corridorTrainId": "T03",
+      "stationTimeline": [
+        {
+          "stationCode": "NDLS",
+          "stationName": "New Delhi",
+          "scheduledArrival": null,
+          "scheduledDeparture": "Origin Dep",
+          "reportedArrival": null,
+          "reportedDeparture": "Departed",
+          "delayMin": 0,
+          "distanceKm": 0,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "UMB",
+          "stationName": "Ambala Cantt Jn",
+          "scheduledArrival": "08:10",
+          "scheduledDeparture": "08:10",
+          "reportedArrival": "08:10",
+          "reportedDeparture": null,
+          "delayMin": 0,
+          "distanceKm": 198,
+          "status": "CURRENT"
+        },
+        {
+          "stationCode": "LDH",
+          "stationName": "Ludhiana Jn",
+          "scheduledArrival": "09:19",
+          "scheduledDeparture": "09:19",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 0,
+          "distanceKm": 312,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "JAT",
+          "stationName": "Jammu Tawi",
+          "scheduledArrival": "12:38",
+          "scheduledDeparture": "12:38",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 0,
+          "distanceKm": 577,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "SVDK",
+          "stationName": "SMVD Katra",
+          "scheduledArrival": "09:19",
+          "scheduledDeparture": null,
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 0,
+          "distanceKm": 757,
+          "status": "UPCOMING"
+        }
+      ],
+      "historicalObservations": [
+        {
+          "observedAt": "2026-11-20T12:54:34.612Z",
+          "stationCode": "UMB",
+          "stationName": "Ambala Cantt Jn",
+          "delayMin": 0,
+          "source": "CACHED",
+          "note": "Baseline cached observation loaded for zero-quota startup & viva reliability."
+        }
+      ],
+      "unavailableFieldsNote": "Live track-circuit coordinates, signal aspect, and physical inter-train meter gap are NOT supplied by RailRadar/external running-status APIs."
+    },
+    "22824": {
+      "trainNo": "22824",
+      "trainName": "Bhubaneswar Tejas Rajdhani (Via Tatanagar)",
+      "originCode": "NDLS",
+      "originName": "New Delhi",
+      "destinationCode": "BBS",
+      "destinationName": "Bhubaneswar",
+      "lastReportedStationCode": "CNB",
+      "lastReportedStationName": "Kanpur Central",
+      "nextScheduledStationCode": "PRYJ",
+      "nextScheduledStationName": "Prayagraj Jn",
+      "scheduledEta": "23:55",
+      "reportedEta": "23:57",
+      "delayMinutes": 2,
+      "runningStatus": "ON_TIME",
+      "lastUpdatedAt": "2026-11-20T12:54:34.612Z",
+      "fetchedFromExternalAt": null,
+      "cacheAgeMinutes": 0,
+      "isStale": false,
+      "provenance": "CACHED",
+      "sourceLabel": "Cached Reference Snapshot (No Live Call Used)",
+      "inWatchlist": true,
+      "corridorTrainId": "T07",
+      "stationTimeline": [
+        {
+          "stationCode": "NDLS",
+          "stationName": "New Delhi",
+          "scheduledArrival": null,
+          "scheduledDeparture": "Origin Dep",
+          "reportedArrival": null,
+          "reportedDeparture": "Departed",
+          "delayMin": 1,
+          "distanceKm": 0,
+          "status": "PASSED"
+        },
+        {
+          "stationCode": "CNB",
+          "stationName": "Kanpur Central",
+          "scheduledArrival": "21:47",
+          "scheduledDeparture": "21:47",
+          "reportedArrival": "21:47",
+          "reportedDeparture": null,
+          "delayMin": 2,
+          "distanceKm": 440,
+          "status": "CURRENT"
+        },
+        {
+          "stationCode": "PRYJ",
+          "stationName": "Prayagraj Jn",
+          "scheduledArrival": "23:55",
+          "scheduledDeparture": "23:55",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 2,
+          "distanceKm": 635,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "TATA",
+          "stationName": "Tatanagar Jn",
+          "scheduledArrival": "10:35",
+          "scheduledDeparture": "10:35",
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 2,
+          "distanceKm": 1388,
+          "status": "UPCOMING"
+        },
+        {
+          "stationCode": "BBS",
+          "stationName": "Bhubaneswar",
+          "scheduledArrival": "23:55",
+          "scheduledDeparture": null,
+          "reportedArrival": null,
+          "reportedDeparture": null,
+          "delayMin": 2,
+          "distanceKm": 1568,
+          "status": "UPCOMING"
+        }
+      ],
+      "historicalObservations": [
+        {
+          "observedAt": "2026-11-20T12:54:34.612Z",
+          "stationCode": "CNB",
+          "stationName": "Kanpur Central",
+          "delayMin": 2,
+          "source": "CACHED",
+          "note": "Baseline cached observation loaded for zero-quota startup & viva reliability."
+        }
+      ],
+      "unavailableFieldsNote": "Live track-circuit coordinates, signal aspect, and physical inter-train meter gap are NOT supplied by RailRadar/external running-status APIs."
+    }
+  },
+  "decisions": [
+    {
+      "id": "DEC-MWOZF9YW",
+      "replayId": "RPL-D4BPDP",
+      "timestamp": "2026-11-20T12:55:32.408Z",
+      "conflictId": "INC-22416-20818",
+      "trainPair": "22416 -> 20818",
+      "planId": "PLAN-OPT-INC-22416-20818",
+      "planVersion": "v2.4-advisory",
+      "planName": "RailRaksha AI Advisory — Predictive Pacing & Short Hold",
+      "decision": "ACCEPTED_FOR_SIMULATION",
+      "controllerNote": "Controller accepted for simulation for RailRaksha AI Advisory — Predictive Pacing & Short Hold.",
+      "reasonCode": "HEADWAY_SAFETY_MARGIN",
+      "beforeMetrics": {
+        "minGapM": 0,
+        "minTtcS": 0,
+        "activeConflicts": 1,
+        "totalDelayMin": 74
+      },
+      "afterMetrics": {
+        "minGapM": 365,
+        "minTtcS": 38.5,
+        "activeConflicts": 0,
+        "totalDelayMin": 77
+      },
+      "provenance": "CONTROLLER_DECISION"
+    }
+  ]
+}

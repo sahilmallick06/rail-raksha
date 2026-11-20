@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RailRaksha SIH-25022 — 3D Railway Digital Twin Simulator</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #060b14;
+        color: #e2e8f0;
+        font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+      }
+      #renderCanvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        outline: none;
+      }
+      .hud-top {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .hud-bar {
+        pointer-events: auto;
+        background: rgba(12, 20, 36, 0.92);
+        border: 1px solid #1c2c47;
+        border-radius: 6px;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
+      }
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-variant-numeric: tabular-nums;
+      }
+      .hud-title {
+        font-weight: 700;
+        color: #f8fafc;
+        letter-spacing: -0.01em;
+      }
+      .hud-sub {
+        color: #94a3b8;
+        font-size: 11px;
+      }
+      .btn {
+        background: #111d33;
+        color: #e2e8f0;
+        border: 1px solid #24395c;
+        border-radius: 4px;
+        padding: 5px 9px;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: #1b2f52;
+        border-color: #38bdf8;
+      }
+      .btn-danger {
+        border-color: #ef4444;
+        color: #fca5a5;
+      }
+      .hud-bottom {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .telemetry-strip {
+        pointer-events: auto;
+        background: rgba(12, 20, 36, 0.92);
+        border: 1px solid #1c2c47;
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 11px;
+        max-width: 520px;
+      }
+      .risk-CLEAR {
+        color: #10b981;
+      }
+      .risk-CAUTION {
+        color: #f59e0b;
+      }
+      .risk-DANGER {
+        color: #ef4444;
+        font-weight: 700;
+      }
+      #fallback2d {
+        position: fixed;
+        inset: 0;
+        display: none;
+        background: #060b14;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="renderCanvas"></canvas>
+    <canvas id="fallback2d"></canvas>
+
+    <div class="hud-top">
+      <div class="hud-bar">
+        <div class="hud-title">Babylon.js 3D Corridor · Research V2</div>
+        <div class="hud-sub mono">4 Tracks · 12 km · Sync: railraksha-live-v3</div>
+      </div>
+      <div class="hud-bar mono" style="font-size: 11px; color: #94a3b8;">
+        Drag to Orbit · Scroll to Zoom
+      </div>
+    </div>
+
+    <div class="hud-bottom">
+      <div class="telemetry-strip mono" id="hudTelemetry">
+        Initializing Babylon.js 3D Corridor Engine...
+      </div>
+      <div class="telemetry-strip mono" id="hudStatus">
+        WEATHER: CLEAR · SIMULATED CORRIDOR (ACADEMIC PROTOTYPE)
+      </div>
+    </div>
+
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script>
+      (function () {
+        const CHANNEL_NAME = 'railraksha-live-v3';
+        const STORAGE_KEY = 'railraksha_live_v3_snapshot';
+        const channel =
+          typeof BroadcastChannel !== 'undefined'
+            ? new BroadcastChannel(CHANNEL_NAME)
+            : null;
+
+        const TRACK_X = [-21, -7, 7, 21];
+        const CORRIDOR_LEN = 12000;
+        const STATION_Z = 1180;
+        const WEATHER_MULT = { clear: 1.0, rain: 1.25, thunderstorm: 1.4, snow: 1.55 };
+
+        let weather = 'clear';
+        let paused = false;
+        let selectedTrainId = 'T02';
+        let cameraMode = 'overview';
+
+        const trains = [
+          { id: 'T01', trainNo: '20818', name: 'Bhubaneswar Tejas Rajdhani', line: 0, z: 4650, speed: 92, target: 92, color: '#ef4444', length: 220, risk: 'CLEAR', gap: 999, ttc: 999 },
+          { id: 'T02', trainNo: '22416', name: 'Varanasi Vande Bharat', line: 0, z: 4180, speed: 118, target: 118, color: '#38bdf8', length: 210, risk: 'CLEAR', gap: 255, ttc: 35 },
+          { id: 'T03', trainNo: '22439', name: 'SMVD Katra Vande Bharat', line: 1, z: 7620, speed: 116, target: 116, color: '#38bdf8', length: 210, risk: 'CLEAR', gap: 999, ttc: 999 },
+          { id: 'T04', trainNo: '12002', name: 'Rani Kamalapati Shatabdi', line: 1, z: 6420, speed: 110, target: 110, color: '#60a5fa', length: 205, risk: 'CLEAR', gap: 990, ttc: 999 },
+          { id: 'T05', trainNo: '12306', name: 'Kolkata Rajdhani', line: 2, z: 5820, speed: 84, target: 84, color: '#f97316', length: 220, risk: 'CLEAR', gap: 999, ttc: 999 },
+          { id: 'T06', trainNo: '12302', name: 'Howrah Rajdhani', line: 2, z: 5110, speed: 96, target: 96, color: '#fb923c', length: 220, risk: 'CLEAR', gap: 490, ttc: 147 },
+          { id: 'T07', trainNo: '22824', name: 'Bhubaneswar Tejas Alt', line: 2, z: 3450, speed: 94, target: 94, color: '#f59e0b', length: 220, risk: 'CLEAR', gap: 1440, ttc: 999 },
+          { id: 'T08', trainNo: 'SIM-FRT-01', name: 'BOXN Freight Rake', line: 3, z: 2180, speed: 58, target: 58, color: '#64748b', length: 340, risk: 'CLEAR', gap: 999, ttc: 999 }
+        ];
+
+        function evaluatePhysics(dt) {
+          const byLine = [[], [], [], []];
+          trains.forEach((t) => byLine[t.line].push(t));
+          byLine.forEach((arr) => {
+            arr.sort((a, b) => b.z - a.z);
+            arr.forEach((t, idx) => {
+              if (idx === 0) {
+                t.gap = 999;
+                t.ttc = 999;
+                t.risk = 'CLEAR';
+              } else {
+                const leader = arr[idx - 1];
+                t.gap = Math.max(0, leader.z - t.z - (leader.length / 2 + t.length / 2));
+                const closing = Math.max(0, (t.speed - leader.speed) / 3.6);
+                t.ttc = closing > 0.05 ? Math.min(999, t.gap / closing) : 999;
+                const throat = Math.abs(t.z - STATION_Z) < 650 ? 1.35 : 1.0;
+                const factor = throat * (WEATHER_MULT[weather] || 1.0);
+                if (t.gap <= 40 || t.ttc <= 3 * factor) t.risk = 'DANGER';
+                else if (t.gap <= 65 || t.ttc <= 7 * factor) t.risk = 'CAUTION';
+                else t.risk = 'CLEAR';
+              }
+            });
+          });
+
+          if (!paused) {
+            trains.forEach((t) => {
+              if (t.speed > t.target) t.speed = Math.max(t.target, t.speed - 5 * dt);
+              else if (t.speed < t.target) t.speed = Math.min(t.target, t.speed + 2 * dt);
+              t.z += (t.speed / 3.6) * dt * 1.35;
+              if (t.z > CORRIDOR_LEN - 200) t.z = 350;
+            });
+          }
+        }
+
+        function broadcastSnapshot() {
+          const payload = {
+            type: 'STATE_UPDATE',
+            source: 'BABYLON_DIGITAL_TWIN_V2',
+            timestamp: new Date().toISOString(),
+            weather,
+            paused,
+            selectedTrainId,
+            trains: trains.map((t) => ({
+              id: t.id,
+              trainNo: t.trainNo,
+              line: t.line,
+              positionM: Number(t.z.toFixed(1)),
+              speedKmh: Number(t.speed.toFixed(1)),
+              netGapM: Number(t.gap.toFixed(1)),
+              ttcS: Number(t.ttc.toFixed(1)),
+              riskLevel: t.risk
+            }))
+          };
+          if (channel) channel.postMessage(payload);
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+          } catch {}
+        }
+
+        function injectConflict() {
+          const leader = trains[0];
+          const follower = trains[1];
+          leader.speed = 62;
+          leader.target = 62;
+          follower.line = leader.line;
+          follower.z = leader.z - (leader.length / 2 + follower.length / 2 + 36);
+          follower.speed = 124;
+          follower.target = 124;
+          selectedTrainId = follower.id;
+          evaluatePhysics(0);
+          broadcastSnapshot();
+        }
+
+        function clearConflict() {
+          trains[0].speed = 96;
+          trains[0].target = 96;
+          trains[1].z = trains[0].z - 520;
+          trains[1].speed = 98;
+          trains[1].target = 98;
+          weather = 'clear';
+          evaluatePhysics(0);
+          broadcastSnapshot();
+        }
+
+        function handleControlMessage(msg) {
+          if (!msg || typeof msg !== 'object') return;
+          if (msg.type === 'REQUEST_SNAPSHOT') {
+            broadcastSnapshot();
+          } else if (msg.type === 'INJECT_CONFLICT') {
+            injectConflict();
+          } else if (msg.type === 'REMOVE_CONFLICT') {
+            clearConflict();
+          } else if (msg.type === 'SET_WEATHER' && msg.weather) {
+            weather = msg.weather;
+            broadcastSnapshot();
+          } else if (msg.type === 'PAUSE') {
+            paused = true;
+            broadcastSnapshot();
+          } else if (msg.type === 'START') {
+            paused = false;
+            broadcastSnapshot();
+          } else if (msg.type === 'SELECT_TRAIN' && msg.trainId) {
+            selectedTrainId = msg.trainId;
+          } else if (msg.type === 'CAMERA_PRESET' && msg.preset) {
+            cameraMode = msg.preset;
+          } else if (msg.type === 'APPLY_PLAN' && Array.isArray(msg.actions)) {
+            msg.actions.forEach((a) => {
+              const target = trains.find((t) => t.id === a.trainId || t.trainNo === a.trainNo);
+              if (target && typeof a.targetSpeedKmh === 'number') {
+                target.target = a.targetSpeedKmh;
+              }
+            });
+            broadcastSnapshot();
+          } else if (msg.type === 'SET_SCENARIO' && msg.preset) {
+            const p = msg.preset;
+            weather = p.weather || 'clear';
+            const follower = trains.find((t) => t.id === p.targetTrainId);
+            const leader = trains.find((t) => t.id === p.leaderTrainId);
+            if (follower && leader) {
+              leader.speed = p.leaderSpeedKmh || 70;
+              leader.target = leader.speed;
+              follower.line = leader.line;
+              follower.z = Math.max(280, leader.z - (leader.length / 2 + follower.length / 2 + (p.injectGapM || 50)));
+              follower.speed = p.followerSpeedKmh || 105;
+              follower.target = follower.speed;
+              selectedTrainId = follower.id;
+            }
+            evaluatePhysics(0);
+            broadcastSnapshot();
+          }
+        }
+
+        if (channel) {
+          channel.onmessage = (ev) => handleControlMessage(ev.data);
+        }
+        window.addEventListener('message', (ev) => handleControlMessage(ev.data));
+
+        function updateHud() {
+          const sel = trains.find((t) => t.id === selectedTrainId) || trains[1];
+          const dangerCount = trains.filter((t) => t.risk === 'DANGER').length;
+          const cautionCount = trains.filter((t) => t.risk === 'CAUTION').length;
+          document.getElementById('hudTelemetry').innerHTML =
+            'TRACKED: <strong>' + sel.trainNo + '</strong> (' + sel.name + ') · ' +
+            'SPD: ' + sel.speed.toFixed(0) + ' km/h · GAP: ' + (sel.gap > 900 ? 'OPEN' : sel.gap.toFixed(0) + ' m') +
+            ' · TTC: ' + (sel.ttc > 120 ? '>120s' : sel.ttc.toFixed(1) + 's') +
+            ' · <span class="risk-' + sel.risk + '">' + sel.risk + '</span>';
+          document.getElementById('hudStatus').textContent =
+            'WEATHER: ' + weather.toUpperCase() + ' · DANGER: ' + dangerCount + ' · CAUTION: ' + cautionCount + ' · SIMULATED';
+        }
+
+        // Software-GL friendly Babylon.js 3D corridor scene
+        function startBabylon() {
+          const canvas = document.getElementById('renderCanvas');
+          if (!window.BABYLON) return startFallback2D();
+
+          let engine;
+          try {
+            engine = new BABYLON.Engine(canvas, false, {
+              preserveDrawingBuffer: false,
+              stencil: false,
+              powerPreference: 'default'
+            });
+            engine.setHardwareScalingLevel(1.5);
+          } catch {
+            return startFallback2D();
+          }
+
+          const scene = new BABYLON.Scene(engine);
+          scene.clearColor = new BABYLON.Color4(0.025, 0.045, 0.085, 1);
+          scene.fogMode = BABYLON.Scene.FOGMODE_EXP2;
+          scene.fogColor = new BABYLON.Color3(0.03, 0.055, 0.1);
+          scene.fogDensity = 0.0012;
+
+          const camera = new BABYLON.ArcRotateCamera(
+            'cam',
+            -Math.PI / 2.25,
+            Math.PI / 3.2,
+            195,
+            new BABYLON.Vector3(0, 4, 420),
+            scene
+          );
+          camera.attachControl(canvas, true);
+          camera.lowerRadiusLimit = 35;
+          camera.upperRadiusLimit = 600;
+          camera.maxZ = 3500;
+
+          const hemi = new BABYLON.HemisphericLight('hemi', new BABYLON.Vector3(0.2, 1, 0.3), scene);
+          hemi.intensity = 0.9;
+          hemi.groundColor = new BABYLON.Color3(0.08, 0.12, 0.2);
+
+          const dir = new BABYLON.DirectionalLight('dir', new BABYLON.Vector3(-0.4, -1, 0.35), scene);
+          dir.intensity = 1.1;
+
+          // Corridor ground scaled 1:10 in Z so 12000m maps to 1200 Babylon units cleanly
+          const SCALE_Z = 0.1;
+          const ground = BABYLON.MeshBuilder.CreateGround('ground', { width: 160, height: 1300 }, scene);
+          ground.position.z = 600;
+          const groundMat = new BABYLON.StandardMaterial('groundMat', scene);
+          groundMat.diffuseColor = new BABYLON.Color3(0.06, 0.085, 0.13);
+          groundMat.specularColor = new BABYLON.Color3(0.02, 0.02, 0.02);
+          ground.material = groundMat;
+
+          // 4 Railway Tracks + Ballast + OHE Portals
+          const ballastMat = new BABYLON.StandardMaterial('ballastMat', scene);
+          ballastMat.diffuseColor = new BABYLON.Color3(0.14, 0.17, 0.23);
+          const railMat = new BABYLON.StandardMaterial('railMat', scene);
+          railMat.diffuseColor = new BABYLON.Color3(0.55, 0.65, 0.78);
+          railMat.emissiveColor = new BABYLON.Color3(0.06, 0.12, 0.18);
+
+          TRACK_X.forEach((x, idx) => {
+            const bed = BABYLON.MeshBuilder.CreateBox('bed' + idx, { width: 5.5, height: 0.4, depth: 1250 }, scene);
+            bed.position.set(x, 0.2, 600);
+            bed.material = ballastMat;
+
+            [-1.1, 1.1].forEach((offset, rIdx) => {
+              const rail = BABYLON.MeshBuilder.CreateBox('rail' + idx + '_' + rIdx, { width: 0.22, height: 0.35, depth: 1250 }, scene);
+              rail.position.set(x + offset, 0.52, 600);
+              rail.material = railMat;
+            });
+          });
+
+          // NDLS Station Canopy at Z = 1180m -> 118 units
+          const canopyMat = new BABYLON.StandardMaterial('canopyMat', scene);
+          canopyMat.diffuseColor = new BABYLON.Color3(0.11, 0.22, 0.36);
+          canopyMat.emissiveColor = new BABYLON.Color3(0.04, 0.12, 0.2);
+          const platform = BABYLON.MeshBuilder.CreateBox('ndlsPlatform', { width: 66, height: 1.2, depth: 36 }, scene);
+          platform.position.set(0, 0.6, STATION_Z * SCALE_Z);
+          platform.material = canopyMat;
+
+          const roof = BABYLON.MeshBuilder.CreateBox('ndlsRoof', { width: 68, height: 0.8, depth: 34 }, scene);
+          roof.position.set(0, 12.5, STATION_Z * SCALE_Z);
+          roof.material = canopyMat;
+
+          // Signal Gantries every 1200m (120 units)
+          const portalMat = new BABYLON.StandardMaterial('portalMat', scene);
+          portalMat.diffuseColor = new BABYLON.Color3(0.24, 0.32, 0.44);
+          for (let z = 60; z <= 1160; z += 100) {
+            const beam = BABYLON.MeshBuilder.CreateBox('gantry_' + z, { width: 56, height: 0.55, depth: 0.55 }, scene);
+            beam.position.set(0, 11, z);
+            beam.material = portalMat;
+            [-28, 28].forEach((px, pIdx) => {
+              const mast = BABYLON.MeshBuilder.CreateBox('mast_' + z + '_' + pIdx, { width: 0.6, height: 11.5, depth: 0.6 }, scene);
+              mast.position.set(px, 5.75, z);
+              mast.material = portalMat;
+            });
+          }
+
+          // Train Meshes (8 articulated rakes with risk halo)
+          const trainMeshes = trains.map((t) => {
+            const mesh = BABYLON.MeshBuilder.CreateBox('train_' + t.id, {
+              width: 3.4,
+              height: 3.8,
+              depth: Math.max(14, t.length * SCALE_Z)
+            }, scene);
+            const mat = new BABYLON.StandardMaterial('tmat_' + t.id, scene);
+            mat.diffuseColor = BABYLON.Color3.FromHexString(t.color);
+            mat.emissiveColor = BABYLON.Color3.FromHexString(t.color).scale(0.28);
+            mesh.material = mat;
+
+            const beacon = BABYLON.MeshBuilder.CreateSphere('beacon_' + t.id, { diameter: 2.2 }, scene);
+            beacon.parent = mesh;
+            beacon.position.y = 3.2;
+            const bMat = new BABYLON.StandardMaterial('bmat_' + t.id, scene);
+            bMat.emissiveColor = new BABYLON.Color3(0.06, 0.72, 0.5);
+            beacon.material = bMat;
+
+            return { train: t, mesh, bMat };
+          });
+
+          let lastTime = performance.now();
+          let lastBroadcast = 0;
+
+          scene.registerBeforeRender(() => {
+            const now = performance.now();
+            const dt = Math.min(0.1, (now - lastTime) / 1000);
+            lastTime = now;
+
+            evaluatePhysics(dt);
+
+            // Weather fog atmosphere
+            scene.fogDensity =
+              weather === 'snow' ? 0.0042 : weather === 'thunderstorm' ? 0.0028 : weather === 'rain' ? 0.002 : 0.0011;
+
+            trainMeshes.forEach(({ train, mesh, bMat }) => {
+              mesh.position.set(TRACK_X[train.line], 2.4, train.z * SCALE_Z);
+              if (train.risk === 'DANGER') bMat.emissiveColor.set(0.95, 0.25, 0.25);
+              else if (train.risk === 'CAUTION') bMat.emissiveColor.set(0.96, 0.62, 0.08);
+              else bMat.emissiveColor.set(0.06, 0.72, 0.5);
+            });
+
+            const focusTrain = trains.find((t) => t.id === selectedTrainId) || trains[1];
+            if (cameraMode === 'follow') {
+              camera.target.x += (TRACK_X[focusTrain.line] - camera.target.x) * 0.08;
+              camera.target.z += (focusTrain.z * SCALE_Z - camera.target.z) * 0.08;
+            } else if (cameraMode === 'throat') {
+              camera.target.x += (0 - camera.target.x) * 0.08;
+              camera.target.z += (STATION_Z * SCALE_Z - camera.target.z) * 0.08;
+            } else {
+              camera.target.x += (0 - camera.target.x) * 0.06;
+              camera.target.z += (focusTrain.z * SCALE_Z - camera.target.z) * 0.04;
+            }
+
+            updateHud();
+            if (now - lastBroadcast > 750) {
+              lastBroadcast = now;
+              broadcastSnapshot();
+            }
+          });
+
+          engine.runRenderLoop(() => scene.render());
+          window.addEventListener('resize', () => engine.resize());
+        }
+
+        function startFallback2D() {
+          document.getElementById('renderCanvas').style.display = 'none';
+          const c = document.getElementById('fallback2d');
+          c.style.display = 'block';
+          const ctx = c.getContext('2d');
+          function draw() {
+            c.width = window.innerWidth;
+            c.height = window.innerHeight;
+            ctx.fillStyle = '#060B14';
+            ctx.fillRect(0, 0, c.width, c.height);
+            evaluatePhysics(0.05);
+            for (let i = 0; i < 4; i++) {
+              const y = 140 + i * 75;
+              ctx.strokeStyle = '#1C2C47';
+              ctx.lineWidth = 4;
+              ctx.beginPath();
+              ctx.moveTo(40, y);
+              ctx.lineTo(c.width - 40, y);
+              ctx.stroke();
+            }
+            trains.forEach((t) => {
+              const x = 40 + (t.z / CORRIDOR_LEN) * (c.width - 80);
+              const y = 140 + t.line * 75;
+              ctx.fillStyle = t.risk === 'DANGER' ? '#ef4444' : t.risk === 'CAUTION' ? '#f59e0b' : '#38bdf8';
+              ctx.fillRect(x - 16, y - 9, 32, 18);
+              ctx.fillStyle = '#e2e8f0';
+              ctx.font = '11px monospace';
+              ctx.fillText(t.trainNo, x - 16, y - 14);
+            });
+            updateHud();
+            requestAnimationFrame(draw);
+          }
+          draw();
+        }
+
+        broadcastSnapshot();
+        startBabylon();
+      })();
+    </script>
+  </body>
+</html>

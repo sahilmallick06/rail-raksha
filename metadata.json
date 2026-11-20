@@ -1,0 +1,6 @@
+{
+  "name": "RailRaksha Control Centre",
+  "description": "AI-Powered Railway Traffic Control, Predictive Conflict Detection, Explainable AI, and 3D Digital Twin Decision-Support Platform (SIH-25022).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
